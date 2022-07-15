@@ -1,7 +1,7 @@
 {
   "name": "pickles-public-gateway",
   "version": "0.0.0",
-  "description": "TypeScript + Routing Controllers + Express API Server",
+  "description": "Gateway server to pickup calls from UI and forward to mailing service",
   "author": "",
   "license": "ISC",
   "scripts": {
