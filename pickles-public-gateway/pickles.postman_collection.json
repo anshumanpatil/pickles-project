@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "ef63153e-b368-46cc-88b2-50b7cc05fdc7",
+		"name": "pickles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "public-gateway",
+			"item": [
+				{
+					"name": "Send Mail Command",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isKafka\" : false,\r\n    \"emailText\" : \"anshuman\",\r\n    \"emailTo\" : \"email@e.com\",\r\n    \"emailFrom\": \"email@e.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/public-gateway/send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"public-gateway",
+								"send"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
