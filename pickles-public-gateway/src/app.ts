@@ -86,12 +86,12 @@ class App {
         },
       },
       info: {
-        description: 'Generated with `routing-controllers-openapi`',
-        title: 'A sample API',
+        description: 'Mailer API',
+        title: 'Mailer API',
         version: '1.0.0',
       },
     });
-
+    //anshu
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
   }
 

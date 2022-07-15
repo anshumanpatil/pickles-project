@@ -19,9 +19,9 @@ export class MailController {
       return load.getTopic();
     }
     try {
-      const response = await axios.get(MAIL_URL);
+      const response = await axios.post(MAIL_URL, payload);
       const data = await response.data;
-      return { data, payload };
+      return { data };
     } catch (error) {
         if(error instanceof AxiosError ) {
           console.log(error.message);
