@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import {ConsumerConfig, SimpleConsumer} from "kafka-typescript";
 
 dotenv.config();
 
@@ -9,21 +10,13 @@ const port = process.env.PORT;
 const rdkafka = require("node-rdkafka")
 const rdkafkaConsumer = rdkafka.KafkaConsumer;
 
-const Kafka = require('node-rdkafka');
-var consumer = new Kafka.KafkaConsumer({
-  'group.id': 'pickles',
-  'metadata.broker.list': 'localhost:9092',
-}, {});
+const consumerConfig = new ConsumerConfig("localhost", "9092", "pickles");
 
-consumer.connect();
-
-consumer.on('ready', () => {
-  console.log('consumer ready..')
-  consumer.subscribe(['pickles']);
-  consumer.consume();
-}).on('data', function(data) {
-  console.log(`received1 message: ${JSON.stringify(JSON.parse(data.value))}`);
-});
+const consumer = new SimpleConsumer()
+  .create(rdkafkaConsumer, ["pickles"], consumerConfig)
+  .onMessage(({topic, key, value}) =>
+    console.log("--> ", JSON.stringify(value, null, 4)))
+  .connect()
 
 
 app.get('/mail-manager', (req: Request, res: Response) => {
