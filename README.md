@@ -2,8 +2,10 @@
 - [VIEWME.VIDEO](https://github.com/anshumanpatil/pickles-project/blob/master/readme.mkv) - View this video for complete walkthrough.
 - Creating readme content was taking time so I preferred video help.
 - All microservices are not dockerised due to time crunch because for _node-rdkafka_ library dont have ready docker image and creating custom docker takes long inough.
+- Testing email service for temperary mail account https://ethereal.email/
 ## Requirements
 - Node JS
 - GIT
 - Docker(If you prefer to use kafka)
+- Test mail account in https://ethereal.email/
 
