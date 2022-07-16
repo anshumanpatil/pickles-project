@@ -4,9 +4,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import hpp from 'hpp';
-
-import nodemailer from "nodemailer";
-import Mail from "nodemailer/lib/mailer";
+import { sendTestMail } from './utils';
 import { ConsumerConfig, SimpleConsumer } from "kafka-typescript";
 
 dotenv.config();
@@ -19,15 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const port = process.env.PORT;
-let transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: 'mathew.langworth@ethereal.email',
-    pass: '1bBMJHcU9E5wGqWWWw'
-  },
-});
+
+
 
 const rdkafka = require("node-rdkafka")
 const rdkafkaConsumer = rdkafka.KafkaConsumer;
@@ -38,20 +29,15 @@ const consumer = new SimpleConsumer()
   .create(rdkafkaConsumer, ["pickles"], consumerConfig)
   .onMessage(({ topic, key, value }) => {
     const body = JSON.parse(value.toString());
-    console.log("--> Mail payload", JSON.stringify(body, null, 4));
+    const info = sendTestMail(body);
+    console.log("--> Mail payload[KAFKA]", JSON.stringify(body, null, 4));
   })
   .connect()
 
 
 app.post('/mail-manager', async (req: Request, res: Response) => {
-
-  let info = await transporter.sendMail({
-    from: '"Pickles" <pickles@pickles.com>',
-    to: req.body.emailTo, 
-    subject: "Mail from pickles", 
-    text: req.body.emailText,
-    html: "<b>Welcome to car auction ?</b>", 
-  });
+  const info = sendTestMail(req.body);
+  console.log("--> Mail payload[HTTP]", JSON.stringify(req.body, null, 4));
   res.json(info);
 });
 

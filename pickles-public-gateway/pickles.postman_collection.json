@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"isKafka\" : false,\r\n    \"emailText\" : \"anshuman\",\r\n    \"emailTo\" : \"email@e.com\",\r\n    \"emailFrom\": \"email@e.com\"\r\n}",
+							"raw": "{\r\n    \"isKafka\" : true,\r\n    \"emailText\" : \"via kafka\",\r\n    \"emailTo\" : \"mathew.langworth@ethereal.email\",\r\n    \"emailFrom\": \"email@e.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
